@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe Game</title>
+    <link rel="stylesheet" href="tictac.css">
+</head>
+<body>
+    <div class="buttons">
+        <div class="container">
+            <button id="btn"></button>
+            <button id="btn"></button>
+            <button id="btn"></button>
+            <button id="btn"></button>
+            <button id="btn"></button>
+            <button id="btn"></button>
+            <button id="btn"></button>
+            <button id="btn"></button>
+            <button id="btn"></button>
+        </div>
+        <div id="msg">
+            <p id="result"></p>
+            <button id="restart">Restart</button>
+        </div>
+           
+
+    </div>
+
+    <script>
+        const buttonid= document.querySelectorAll("#btn");
+        const result=document.getElementById("msg");
+        const restartbtn=document.getElementById("restart");
+        let winningpattern=[
+            [0,1,2],
+            [0,3,6],
+            [2,5,8],
+            [6,7,8],
+            [3,4,5],
+            [1,4,7],
+            [0,4,8],
+            [2,4,6],
+        ];
+        let xturn=true;
+        let count=0;
+        const disablebtn= () =>{
+            buttonid.forEach((e)=>(e.disabled=true));
+        };
+        const enablebtn=()=>{
+            buttonid.forEach((e) =>{
+                e.innerText = "";
+                e.disabled= false;
+            });
+        };
+        const winner=(letter) =>{
+            disablebtn();
+            if(letter == "X"){
+                result.innerHTML="X Wins";
+            }else{
+                result.innerHTML="O Wins";
+            }
+        };
+        const drawfunc=()=>{
+            disablebtn();
+            result.innerHTML="Its a Draw";
+        };
+        restartbtn.addEventListener("click", ()=>{
+            count=0;
+            enablebtn();
+        });
+        const finalresut=()=>{
+            for(i of winningpattern){
+                let[btn1,btn2,btn3]=[
+                    buttonid[i[0]].innerText,
+                    buttonid[i[1]].innerText,
+                    buttonid[i[2]].innerText,
+                ];
+                if(btn1 != "" && (btn2 != "") && (btn3!="")){
+                    if( btn1== btn2 && btn2==btn3){
+                        winfunctiom(btn1);
+                    }
+                }
+            }
+        };
+        buttonid.forEach((e)=>{
+            e.addEventListener("click",()=>{
+                if(xturn){
+                    xturn=false;
+                    e.innerText="X";
+                    e.disabled=true;
+                }else{
+                    xturn=true;
+                    e.innerText="0";
+                    e.disabled=true;
+                }
+                
+                count=count+1;
+                if(count==9){
+                    drawfunc();
+                }
+                finalresut();
+            });
+        });
+        
+
+
+    </script>
+</body>
+</html>

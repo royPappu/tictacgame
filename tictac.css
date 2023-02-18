@@ -1,0 +1,12 @@
+#btn{
+    width: 80px;
+    height: 80px;
+    border: 2px solid blue;
+    cursor: pointer;
+}
+.container{
+    display: grid;
+    grid-template-columns: repeat(3, auto) ;
+    width: 250px;
+    margin: auto;
+}
